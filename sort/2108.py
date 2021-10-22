@@ -51,9 +51,6 @@ def statistics(arr):
 
 statistics(arr)
 
-
-최빈값
-범위
 '''
 import sys
 from collections import Counter
