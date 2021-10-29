@@ -1,4 +1,5 @@
-'''
+"""
+1.
 m, n = map(int, input().split())
 def decArr(n):
     dec = [2]
@@ -22,7 +23,7 @@ for i in dec:
         print(i)
 
 
-
+2.
 m, n = map(int, input().split())
 dec = [2]
 dec += list(range(3,n+1,2)) 
@@ -103,28 +104,28 @@ for i in range(M, N+1):
         print(i)
 
 메모리는 제일 적게 사용하지만 시간이 오래걸림
-
         
-'''
+"""
 # True로 배열을 채우는게 숫자로 채우는 것보다 메모리, 시간에서 차이남
 m, n = map(int, input().split())
+
+
 def decArr(n):
-    dec = [True]*(n+1)
+    dec = [True] * (n + 1)
     square = int(n ** 0.5)
     i = 2
     while i <= square:
-        count = n//i
+        count = n // i
         if bool(dec[i]):
-            for j in range(2,count+1):
-                dec[i*j] = False
-        i+=1
+            for j in range(2, count + 1):
+                dec[i * j] = False
+        i += 1
     return dec
 
-dec = decArr(n)
-#print(dec)
 
-for i in range(m,n+1):
+dec = decArr(n)
+# print(dec)
+
+for i in range(m, n + 1):
     if i > 1 and dec[i]:
         print(i)
-
-
