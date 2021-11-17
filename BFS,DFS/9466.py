@@ -38,10 +38,3 @@ for _ in range(T):
             cnt = DFS(i, cnt)
 
     print(stu-cnt)
-            
-        
-    
-
-
-        
-
