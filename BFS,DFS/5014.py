@@ -9,9 +9,7 @@ D: 아래로 D층
 도달할 수 없는 경우
 1. s>g이고 d가 0인 경우
 2. s<g이고 u가 0인 경우
-3. u==d이고 수가 그 사이에 있는 경우
 
-70 1 2 2 0
 '''
 import sys
 from collections import deque
