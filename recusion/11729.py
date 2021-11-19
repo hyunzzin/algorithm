@@ -14,11 +14,11 @@ n = int(input())
 def hanoi(from_,by_,to_,n):
     if n==1:
         print(from_,to_)
-        return 0
+        return 
     hanoi(from_,to_,by_,n-1)
     print(from_,to_)
     hanoi(by_,from_,to_,n-1)
-    return 0
+    return 
 
 print(2**n-1)
 hanoi('1','2','3',n)
