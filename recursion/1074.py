@@ -16,6 +16,17 @@ import sys
 n,r,c = map(int, sys.stdin.readline().split())
 
 def Z(n,r,c):
-    
-    return
-Z(n,r,c)
+    if n== 0:
+        return 0
+    h = 2**(n-1)
+    # 1구역인 경우
+    if r<h and c<h: return Z(n-1,r,c)
+    if r<h and c>=h: # 2구역인 경우
+        return h*h + Z(n-1,r, c-h)
+    # 3구역인 경우
+    if r>=h and c<h:
+        return 2*h*h + Z(n-1,r-h, c)
+    # 4구역인 경우
+    return 3*h*h + Z(n-1,r-h, c-h)
+
+print(Z(n,r,c))
