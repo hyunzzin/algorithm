@@ -1,12 +1,6 @@
 '''
 쿼드트리
-'''
-import sys
-n = int(sys.stdin.readline())
-vdo=[]
-for _ in range(n):
-    vdo.append(list(map(int,sys.stdin.readline().strip('\n'))))
-'''
+
 함수 정의
     def(x,y,n)
 base condition
@@ -14,6 +8,12 @@ base condition
 재귀 식
     def(x+i*n,y+j*n,n//2)
 '''
+import sys
+n = int(sys.stdin.readline())
+vdo=[]
+for _ in range(n):
+    vdo.append(list(map(int,sys.stdin.readline().strip('\n'))))
+
 def check(x,y,n):
     for i in range(x,x+n):
         for j in range(y,y+n):
