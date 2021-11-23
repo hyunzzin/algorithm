@@ -1,6 +1,9 @@
-# 1부터 N까지 중복 없이 M개를 고른 수열
-# permutation, 순열에 관한 문제이다.
-"""
+'''
+N과 M
+1부터 N까지 중복 없이 M개를 고른 수열
+permutation, 순열에 관한 문제이다.
+수를 하나씩 추가하면서 길이가 M인 수열이 완성되면 출력
+
 백트래킹 문제의 코드 구조
 def 재귀함수(x):
     if 정답이라면?:
@@ -11,36 +14,53 @@ def 재귀함수(x):
                 자식노드로 이동
                 재귀함수(x+1)
                 부모노드로 이동
-"""
 
-n, m = map(int, input().split())
-visit = [0] * (n + 1)
-arr = [0] * (m + 1)
+'''
 
-
-def not_duplicate(num):  # 중복인지 확인
-    if visit[num] == 0:
-        return True
-    else:
-        return False
+import sys
+n,m = map(int, sys.stdin.readline().split())
+# 수열을 담을 배열
+arr= [False for _ in range(m)]
+# 특정 수가 쓰였는지 true or false로 나타내는 배열
+visited = [False for _ in range(n+2)]
 
 
-def permutation(x):
-    if x == m + 1:
-        for i in range(1, m + 1):
-            print(arr[i], end=" ")
-        print(arr, x)  # 줄바꿈인가
-    else:
-        for i in range(1, n + 1):
-            if not_duplicate(i):
-                visit[i] = 1
-                arr[x] = i
-                permutation(x + 1)
-                print("x :", x, "i :", i)
-                arr[x] = 0
-                visit[i] = 0
+def bt(k):
+    if k == m: # 개수를 다 골랐다면
+        for i in range(m):
+            print(arr[i],end=' ') # 수열 출력하기 m이 2면 1 2이렇게 출력된다.
+        print()
+        return
+    for i in range(1,n+1): # 1부터 n까지 m개를 고르는 것
+        if not visited[i]: # 특정 수가 사용되지 않았다면
+            arr[k] = i
+            visited[i]=1
+            bt(k+1) # 출력되고 나면 다시 방문안한 상태로 돌려주기
+            visited[i]=0
+
+bt(0)
 
 
-permutation(1)
 
-# 중복이 핵심, 중복을 방지하기 위해 visit의 인덱스로 사용된 숫자를 표시
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
