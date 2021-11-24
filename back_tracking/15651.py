@@ -1,31 +1,34 @@
-# 1부터 N까지 중복 없이 M개를 고른 수열
-# permutation, 순열에 관한 문제이다.
-n, m = map(int, input().split())
-arr = [0]*(m+1)
-
-def permutation(x):
-    if x == m+1:
-        for i in arr[1:m+1]:
-            print(i, end = ' ')
+'''
+N과 M(3)
+함수 정의
+    def(cnt)
+base condition
+    if cnt == m:
         print()
-        '''
-        1등 제일빠름 1840ms
-        print(' '.join(map(str, arr[1:m+1]))) 
+        return
+재귀식
+    def(cnt+1)
+'''
+import sys
+n,m = map(int, sys.stdin.readline().split())
+arr = [False for _ in range(m)]
 
-        2등 2948ms
-        for i in arr[1:m+1]:
-            print(i, end = ' ')
-        print()
+def bt(cnt):
+    if cnt == m:
+        print(' '.join(map(str, arr)))
+        return
+    for i in range(1,n+1):
+        arr[cnt] = i
+        bt(cnt+1)
+bt(0)
 
-        3등 3160ms
-        for i in range(1, m+1):
-            print(arr[i], end = ' ')
-        print()
-        '''
-    else:
-        for i in range(1, n+1):
-            arr[x] = i
-            permutation(x+1)
-            arr[x] = 0
 
-permutation(1)
+
+
+
+
+
+
+
+
+        
