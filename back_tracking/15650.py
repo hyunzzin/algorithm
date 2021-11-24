@@ -1,5 +1,10 @@
-# 1부터 N까지 중복 없이 M개를 고른 수열
-# permutation, 순열에 관한 문제이다.
+'''
+N과 M
+1부터 N까지 중복 없이 M개를 고른 수열
+오름차순
+'''
+# 1번째 풀이
+
 n, m = map(int, input().split())
 arr = [0] * (m + 1)
 
@@ -15,8 +20,22 @@ def permutation(x):
                 arr[x] = i
                 permutation(x + 1)
                 arr[x] = 0
-
-
 permutation(1)
 
-# 중복이 핵심, 중복을 방지하기 위해 visit의 인덱스로 사용된 숫자를 표시
+
+# 2번째 풀이
+import sys
+n,m = map(int, sys.stdin.readline().split())
+visited = [False for _ in range(n+1)] # 방문 여부 확인
+arr = [False for _ in range(m)] # m의 개수만큼 수 저장
+def bt(cnt,k):
+    if cnt == m:
+        print(' '.join(map(str,arr)))
+        return
+    for i in range(k, n+1):
+        if not visited[i]:
+            visited[i] = True
+            arr[cnt] = i
+            bt(cnt+1,i)
+            visited[i] = False
+bt(0,1)
