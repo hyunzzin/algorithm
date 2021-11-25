@@ -1,35 +1,23 @@
-n, m = map(int, input().split())
-arr = [0]
-
-def permutation(x):
-    if x == m+1:
-        print(' '.join(map(str, arr[1:m+1])))
+'''
+N과 M(4)
+함수 정의
+    def(cnt, k)
+base condition
+    if cnt == m:
+        print()
         return
-    
-    for i in range(1, n+1):
-        if max(arr) <= i:
-            arr.append(i)
-            permutation(x+1)
-            arr.pop()
-
-permutation(1)
-
+재귀 식
+    def(cnt+1, i)
 
 '''
-n,m=map(int,input().split())
-result=[]
-
-def dfs(s):
-    if len(result) == m:
-        print(' '.join(map(str,result)))
+import sys
+n,m = map(int, sys.stdin.readline().split())
+arr = [False for _ in range(m)]
+def bt(cnt, k):
+    if cnt == m:
+        print(' '.join(map(str, arr)))
         return
-
-    for i in range(s,n+1):
-        if i == 0:
-            continue
-        result.append(i)
-        dfs(s)
-        result.pop()
-        s +=1
-dfs(1)
-'''
+    for i in range(k,n+1):
+        arr[cnt]=i
+        bt(cnt+1,i)
+bt(0,1)
