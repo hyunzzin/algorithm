@@ -25,11 +25,30 @@
 오른쪽 - (0,x)(y-1,-1,-1)
 왼쪽 - (0,x)(0,y)
 
-테스트 케이스
-https://www.acmicpc.net/board/view/16151
+반례
+3
+0 8 1024
+4 0 4
+0 1024 32
+output: 1024
+correct answer: 2048
+
+3
+256 8 128
+16 0 256
+0 8 0
+output: 256
+correct answer: 512
+
+3
+0 64 8
+128 0 32
+32 0 0
+output: 128
+correct answer: 256
 
 '''
-def move(arr,q,n):
+def move(arr_c,q,n):
     maxN = -sys.maxsize
     if q == 0 or q==1:
         mx = [(0,n,1),(n-1,-1,-1)]
@@ -37,62 +56,59 @@ def move(arr,q,n):
             first = 0 # 더할 블록
             idx = mx[q][0]
             for j in range(mx[q][0],mx[q][1],mx[q][2]):
-                #print('j',j,'i',i)
+                if arr_c[j][i]==0: continue
                 if first:
-                    if first == arr[j][i]:
-                        first += arr[j][i]
-                        arr[j][i] = 0
-                        #print('1',idx,i)
-                        arr[idx][i] = first
-                        first = 0
+                    if first == arr_c[j][i]:
+                        first += arr_c[j][i]
+                        arr_c[j][i] = 0
+                        arr_c[idx][i] = first
                         maxN = max(maxN,first)
+                        first = 0
                     else:
                         maxN = max(maxN,first)
-                        #print('2',idx,i)
-                        arr[idx][i] = first
-                        first = arr[j][i]
-                        arr[j][i] = 0
+                        arr_c[idx][i] = first
+                        first = arr_c[j][i]
+                        arr_c[j][i] = 0
                     if q==0:
                         idx+=1
                     else:
                         idx-=1
                 else:
-                    #print('no first',first)
-                    first = arr[j][i]
-                    arr[j][i] = 0
+                    first = arr_c[j][i]
+                    arr_c[j][i] = 0
             if first:
-                arr[idx][i] = first
+                arr_c[idx][i] = first
                 maxN = max(maxN,first)
-            #print(j,i)    
     elif q == 2 or q==3:
         my = [0,0,(n-1,-1,-1),(0,n,1)]
         for i in range(n):
             first = 0 # 더할 블록
             idx = my[q][0]
             for j in range(my[q][0],my[q][1],my[q][2]):
+                if arr_c[i][j]==0: continue
                 if first:
-                    if first == arr[i][j]:
-                        first += arr[i][j]
-                        arr[i][j] = 0
-                        arr[i][idx] = first
-                        first = 0
+                    if first == arr_c[i][j]:
+                        first += arr_c[i][j]
+                        arr_c[i][j] = 0
+                        arr_c[i][idx] = first
                         maxN = max(maxN,first)
+                        first = 0
                     else:
                         maxN = max(maxN,first)
-                        arr[i][idx] = first
-                        first = arr[i][j]
-                        arr[i][j] = 0      
+                        arr_c[i][idx] = first
+                        first = arr_c[i][j]
+                        arr_c[i][j] = 0      
                     if q==2:
                         idx-=1
                     else:
                         idx+=1
                 else:
-                    first = arr[i][j]
-                    arr[i][j] = 0
+                    first = arr_c[i][j]
+                    arr_c[i][j] = 0
             if first:
-                arr[i][idx] = first
+                arr_c[i][idx] = first
                 maxN = max(maxN,first)
-    return arr,maxN
+    return arr_c,maxN
     
 
 # 상하좌우 경우의 수
@@ -100,12 +116,11 @@ def case(num,c,cases,q,arr,n):
     global ans
     if num == c:
         arr_c = copy.deepcopy(arr)
-        #print(q)
         for j in range(5):
             arr_c,max_n = move(arr_c,q[j],n)
         ans = max(ans,max_n)
-        #print(maxN)
         return
+    
     for i in range(4):
         q[num] = cases[i]
         case(num+1,c,cases,q,arr,n)
