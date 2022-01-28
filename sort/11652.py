@@ -20,12 +20,12 @@ for a in range(1,len(arr)):
         cnt+=1
     else:
         if cnt > ans_cnt:
-            print('점검 ',cur,cnt)
+
             ans = cur
             ans_cnt=cnt
         cur = arr[a]
         cnt = 1
 if cnt > ans_cnt:
-    print(cnt,'여기')
+
     ans = cur
 print(ans)
